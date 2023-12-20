@@ -318,7 +318,9 @@ class Mysql(object):
             sql = "SELECT is_admin from mshd.user where uid='" + str(uid) + "';"
             self.cursor.execute(sql)
             is_admin = self.cursor.fetchall()
-            return is_admin[0][0]
+            if is_admin[0][0] == 1:
+                return True
+        return False
 
     def verify_password(self, uid, verified_password):
         sql = "SELECT password from mshd.user where uid='" + str(uid) + "';"
